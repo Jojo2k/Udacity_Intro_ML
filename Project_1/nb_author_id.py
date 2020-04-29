@@ -24,10 +24,14 @@ from sklearn.metrics import accuracy_score
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
 
-model = GaussianNB()
-model.fit(features_train,labels_train)
-prediction  = model.predict(features_test)
 
+model = GaussianNB()
+t0 = time()
+model.fit(features_train,labels_train)
+print('training time of the classifier is ', round(time()-t0,3), 'seconds')
+t1 = time()
+prediction  = model.predict(features_test)
+print('Prediction time of the classifier is ', round(time()-t1,3), 'seconds')
 accuracy = accuracy_score(prediction,labels_test)
 
 print('Accuracy of the naive bayes method is ', accuracy*100)
