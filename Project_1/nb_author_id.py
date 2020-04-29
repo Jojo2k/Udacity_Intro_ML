@@ -30,13 +30,4 @@ prediction  = model.predict(features_test)
 
 accuracy = accuracy_score(prediction,labels_test)
 
-
-
-
-#########################################################
-### your code goes here ###
-
-
-#########################################################
-
-
+print('Accuracy of the naive bayes method is ', accuracy*100)
