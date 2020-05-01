@@ -22,8 +22,9 @@ enron_data = pickle.load(open(r"E:\GitHub\Udacity_Intro_ML\Project_4\final_proje
 
 count= 0
 for name,value in enron_data.items():
-    if value['email_address'] != 'NaN':
+    if  value['total_payments'] == 'NaN':
         count+=1
 
 
 
+# Multiple questions were answered bby changing the parameters of dictionary.
