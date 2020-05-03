@@ -17,11 +17,12 @@ import sys
 import pickle
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
+from sklearn.metrics import r2_score
 dictionary = pickle.load( open(r"E:\GitHub\Udacity_Intro_ML\Project_5\final_project_dataset_modified.pkl", "r+b") )
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
-features_list = ["bonus", "salary"]
+features_list = ["bonus", "long_term_incentive"]
 data = featureFormat( dictionary, features_list, \
                      sort_keys =r'E:\GitHub\Udacity_Intro_ML\Project_5\python2_lesson06_keys.pkl',remove_any_zeroes=True)
 target, features = targetFeatureSplit( data )
@@ -42,6 +43,7 @@ from sklearn.linear_model import LinearRegression
 
 reg = LinearRegression()
 reg.fit(feature_train,target_train)
+pred = reg.predict(feature_test)
 
 
 
@@ -63,8 +65,8 @@ try:
 except NameError:
     pass
 
-reg.fit(feature_test,target_test)
-plt.plot(feature_train,reg.predict(feature_train),color = 'b')
+# reg.fit(feature_test,target_test)
+# plt.plot(feature_train,reg.predict(feature_train),color = 'b')
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
