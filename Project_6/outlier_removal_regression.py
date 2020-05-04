@@ -62,7 +62,7 @@ if len(cleaned_data) > 0:
     ### refit your cleaned data!
     try:
         reg.fit(ages, net_worths)
-        plt.plot(ages, reg.predict(ages), color="blue")
+        plt.plot(ages, reg.predict(ages_train), color="blue")
     except NameError:
         print ("you don't seem to have regression imported/created,")
         print ("   or else your regression object isn't named reg")
