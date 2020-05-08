@@ -14,6 +14,7 @@ import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import MinMaxScaler
 
 
 
@@ -51,22 +52,27 @@ feature_1 = "salary"
 feature_2 = "exercised_stock_options"
 feature_3 = 'total_payments'
 poi  = "poi"
-features_list = [poi, feature_1, feature_2, feature_3]
+features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
+scaler = MinMaxScaler()
+rescaled_values = scaler.fit(finance_features)
+re_salary_stock = scaler.transform([[200000, 1000000]])
+print("The rescaled values for 200000 salary and 100000 stock options are ",re_salary_stock)
 
 
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
-for f1, f2, f3 in finance_features:
+for f1, f2 in finance_features:
     plt.scatter( f1, f2 )
 plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-kmeans = KMeans(n_clusters = 3).fit(finance_features)
+finance_features = scaler.transform(finance_features)
+kmeans = KMeans(n_clusters = 2).fit(finance_features)
 pred = kmeans.predict(finance_features)
 val_stock, val_salary = [], []
 for key, value in data_dict.items():
@@ -78,9 +84,6 @@ for key, value in data_dict.items():
         
 print('maximum and minimum values for stock options are {0} and {1} '.format(max(val_stock), min(val_stock)))
 print('maximum and minimum values for salary are {0} and {1} '.format(max(val_salary), min(val_salary)))
-    
-    
-
 
 
 ### rename the "name" parameter when you change the number of features
