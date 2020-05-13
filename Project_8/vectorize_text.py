@@ -5,7 +5,7 @@ import pickle
 import re
 import sys
 
-sys.path.append( "../tools/" )
+sys.path.append( r"E:\GitHub\Udacity_Intro_ML\Project_8" )
 from parse_out_email_text import parseOutText
 
 """
@@ -43,7 +43,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         ### once everything is working, remove this line to run over full dataset
         temp_counter += 1
         if temp_counter < 200:
-            path = os.path.join('..', path[:-1])
+            path = os.path.join(r'E:/GitHub/Udacity_Intro_ML/Project_8', path[:-1])
             print (path)
             email = open(path, "r")
 
@@ -51,13 +51,20 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
             text = parseOutText(email)
 
             ### use str.replace() to remove any instances of the words
-            ### ["sara", "shackleton", "chris", "germani"]
-            text = text.replace(["sara", "shackleton", "chris", "germani"],'')
+            y = ["sara", "shackleton", "chris", "germani"]
+            for name in  y:
+                if name in text:
+                    text = text.replace(name, '')
+                    word_data.append(text)
 
             ### append the text to word_data
-            word_data.append(text)
+            
 
             ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
+            if name == 'sara':
+                from_data.append(0)
+            else:
+                from_data.append(1)
             
 
 
@@ -67,8 +74,8 @@ print ("emails processed")
 from_sara.close()
 from_chris.close()
 
-pickle.dump( word_data, open("your_word_data.pkl", "w") )
-pickle.dump( from_data, open("your_email_authors.pkl", "w") )
+pickle.dump( word_data, open("your_word_data.pkl", "wb") )
+pickle.dump( from_data, open("your_email_authors.pkl", "wb") )
 
 
 
