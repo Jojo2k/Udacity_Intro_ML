@@ -41,34 +41,34 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
     for path in from_person:
         ### only look at first 200 emails when developing
         ### once everything is working, remove this line to run over full dataset
-        temp_counter += 1
-        if temp_counter < 200:
-            path = os.path.join(r'E:/GitHub/Udacity_Intro_ML/Project_8', path[:-1])
-            print (path)
-            email = open(path, "r")
+    # temp_counter += 1
+    # if temp_counter < 200:
+        path = os.path.join(r'E:/GitHub/Udacity_Intro_ML/Project_8', path[:-1])
+        print (path)
+        email = open(path, "r")
 
-            ### use parseOutTe xt to extract the text from the opened email
-            text = parseOutText(email)
+        ### use parseOutTe xt to extract the text from the opened email
+        text = parseOutText(email)
 
-            ### use str.replace() to remove any instances of the words
-            y = ["sara", "shackleton", "chris", "germani"]
-            for name in  y:
-                if name in text:
-                    text = text.replace(name, '')
-                    word_data.append(text)
+        ### use str.replace() to remove any instances of the words
+        y = ["sara", "shackleton", "chris", "germani"]
+        for name in  y:
+            if name in text:
+                text = text.replace(name, '')
+                
 
-            ### append the text to word_data
-            
+        ### append the text to word_data
+        word_data.append(text)
 
-            ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
-            if name == 'sara':
-                from_data.append(0)
-            else:
-                from_data.append(1)
-            
+        ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
+        if name == 'sara':
+            from_data.append(0)
+        else:
+            from_data.append(1)
+        
 
 
-            email.close()
+        email.close()
 
 print ("emails processed")
 from_sara.close()

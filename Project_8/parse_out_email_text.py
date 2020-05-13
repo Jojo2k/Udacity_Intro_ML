@@ -34,7 +34,7 @@ def parseOutText(f):
         stemmer = SnowballStemmer('english')
         for x in new_words:
             stem_word = stemmer.stem(x)
-            words += stem_word+ ' '
+            words += stem_word +' '
             
 
         ### split the text string into individual words, stem each word,
