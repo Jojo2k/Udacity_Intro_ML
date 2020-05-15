@@ -4,6 +4,8 @@ import os
 import pickle
 import re
 import sys
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 sys.path.append( r"E:\GitHub\Udacity_Intro_ML\Project_8" )
 from parse_out_email_text import parseOutText
@@ -82,5 +84,5 @@ pickle.dump( from_data, open("your_email_authors.pkl", "wb") )
 
 
 ### in Part 4, do TfIdf vectorization here
-
-
+vectorizer = TfidfVectorizer(stop_words ='english')
+data = vectorizer.fit_transform(word_data)
